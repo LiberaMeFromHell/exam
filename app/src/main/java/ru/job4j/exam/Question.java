@@ -1,3 +1,10 @@
+/**
+ * The app demonstrates screen rotation event in Android.
+ *
+ * @author Rustam Galimov
+ * @version 1.0
+ * @since 30.10.2019
+ */
 package ru.job4j.exam;
 
 import java.util.List;
@@ -9,7 +16,7 @@ public class Question {
     private int answer;
     private int choose = -1;
 
-    public Question(int id, String text, List<Option> options, int answer) {
+    public Question(final int id, final String text, final List<Option> options, final int answer) {
         this.id = id;
         this.text = text;
         this.options = options;
@@ -20,7 +27,7 @@ public class Question {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(final int id) {
         this.id = id;
     }
 
@@ -28,7 +35,7 @@ public class Question {
         return text;
     }
 
-    public void setText(String text) {
+    public void setText(final String text) {
         this.text = text;
     }
 
@@ -36,7 +43,7 @@ public class Question {
         return options;
     }
 
-    public void setOptions(List<Option> options) {
+    public void setOptions(final List<Option> options) {
         this.options = options;
     }
 
@@ -44,7 +51,7 @@ public class Question {
         return answer;
     }
 
-    public void setAnswer(int answer) {
+    public void setAnswer(final int answer) {
         this.answer = answer;
     }
 
@@ -52,7 +59,7 @@ public class Question {
         return choose;
     }
 
-    public void setChoose(int choose) {
+    public void setChoose(final int choose) {
         this.choose = choose;
     }
 }

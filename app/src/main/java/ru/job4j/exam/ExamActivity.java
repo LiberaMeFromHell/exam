@@ -1,7 +1,13 @@
+/**
+ * The app demonstrates screen rotation event in Android.
+ *
+ * @author Rustam Galimov
+ * @version 1.0
+ * @since 30.10.2019
+ */
 package ru.job4j.exam;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,12 +15,13 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.Arrays;
 import java.util.List;
 
 public class ExamActivity extends AppCompatActivity {
-
+    /**
+     * The variable represents a current question.
+     */
     private int position = 0;
 
     private Button next;
@@ -45,7 +52,7 @@ public class ExamActivity extends AppCompatActivity {
     );
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.exam_activity);
         fillForm();
@@ -54,7 +61,7 @@ public class ExamActivity extends AppCompatActivity {
         next.setOnClickListener(this::nextBtn);
 
         previous = findViewById(R.id.previous);
-        previous.setOnClickListener(this::previoustBtn);
+        previous.setOnClickListener(this::previousBtn);
 
         RadioGroup variants = findViewById(R.id.variants);
         variants.setOnCheckedChangeListener(this::radioButtonChecked);
@@ -79,8 +86,7 @@ public class ExamActivity extends AppCompatActivity {
 
         if (question.getChoose() != -1) {
             variants.check(question.getChoose());
-        }
-        else {
+        } else {
 
             findViewById(R.id.previous).setEnabled(false);
             findViewById(R.id.next).setEnabled(false);
@@ -92,29 +98,30 @@ public class ExamActivity extends AppCompatActivity {
         int id = variants.getCheckedRadioButtonId();
         Question question = this.questions.get(this.position);
         Toast.makeText(
-                this, "Your answer is " + id + ", correct is " + question.getAnswer(),
+                this,
+                "Your answer is " + id + ", correct is " + question.getAnswer(),
                 Toast.LENGTH_SHORT
         ).show();
         saveChoice(id);
     }
 
-    private void saveChoice(int choice) {
+    private void saveChoice(final int choice) {
         this.questions.get(this.position).setChoose(choice);
     }
 
-    private void nextBtn(View view){
+    private void nextBtn(final View view) {
         showAnswer();
         position++;
         fillForm();
     }
 
-    private void previoustBtn(View view){
+    private void previousBtn(final View view) {
         showAnswer();
         position--;
         fillForm();
     }
 
-    private void radioButtonChecked(RadioGroup radioGroup, int i){
+    private void radioButtonChecked(final RadioGroup radioGroup, final int i) {
         next.setEnabled(position != questions.size() - 1);
         previous.setEnabled(position != 0);
     }

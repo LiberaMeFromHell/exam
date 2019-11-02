@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'checkstyle'
 
 android {
     compileSdkVersion 29
@@ -31,3 +32,21 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
+
+task checkstyle(type: Checkstyle) {
+    // Cleaning the old log because of the creation of the new ones
+    delete fileTree(dir: "${project.rootDir}/app/build/reports")
+    configFile file("${project.rootDir}/app/config/checkstyle.xml")
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+    // empty classpath
+    classpath = files()
+    //Failing the build
+    ignoreFailures = false
+}
+
+checkstyle {
+    toolVersion = '8.26'
+}
+
